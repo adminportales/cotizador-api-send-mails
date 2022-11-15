@@ -15,8 +15,34 @@ return function (App $app) {
         return $response;
     });
 
-    $app->post('/sendMail', function (Request $request, Response $response) {
+    $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('Hello world!');
-        return $request->getBody();
+        return $response;
+    });
+    $app->post('/sendMail', function (Request $request, Response $response) {
+        $data = $request->getParsedBody();
+
+        // Create the Transport
+        $transport = (new Swift_SmtpTransport('mail.bhtrademarketlatam.com', 465, 'ssl'))
+            ->setUsername('cotizaciones@bhtrademarketlatam.com')
+            ->setPassword('L1y^XgVG9KT*');
+
+        $mailer = new Swift_Mailer($transport);
+
+        $message = (new Swift_Message('Wonderful Subject'))
+            ->setFrom(['cotizaciones@bhtrademarketlatam.com' => 'Beatriz Luna'])
+            ->setTo(['antoniotd87@gmail.com'])
+            ->setBody('Here is the message itself');
+        $result = $mailer->send($message);
+        $payload = json_encode($result);
+        $response->getBody()->write($payload);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(201);
+    });
+
+    $app->group('/users', function (Group $group) {
+        $group->get('', ListUsersAction::class);
+        $group->get('/{id}', ViewUserAction::class);
     });
 };
