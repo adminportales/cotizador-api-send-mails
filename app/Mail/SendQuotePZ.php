@@ -34,7 +34,7 @@ class SendQuotePZ extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.quotepdf.pz')
+        return $this->markdown('mail.quotepdf.promozale')
             ->with('cliente', $this->cliente)
             ->with('vendedor', $this->vendedor)
             ->subject('Cotizacion Promo Zale')
