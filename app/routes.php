@@ -32,7 +32,7 @@ return function (App $app) {
         $message = (new Swift_Message('Wonderful Subject'))
             ->setFrom(['cotizaciones@bhtrademarketlatam.com' => 'Beatriz Luna'])
             ->setTo(['antoniotd87@gmail.com'])
-            ->setBody('Here is the message itself');
+            ->setBody('Here is the messsage itself');
         $result = $mailer->send($message);
         $payload = json_encode($result);
         $response->getBody()->write($payload);
