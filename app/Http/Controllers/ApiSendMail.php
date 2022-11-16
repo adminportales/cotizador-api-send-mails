@@ -18,7 +18,7 @@ class ApiSendMail extends Controller
         } catch (Exception $e) {
             return response()->json(["msg" =>  $e->getMessage()], 400);
         }
-        return response()->json(["msg" => "Envio Correcto"], 200);
+        return response()->json(["msg" => 1], 200);
     }
 
     public function sendMailPZ(Request $request)
@@ -29,6 +29,6 @@ class ApiSendMail extends Controller
         } catch (Exception $e) {
             return response()->json(["msg" =>  $e->getMessage()], 400);
         }
-        return response()->json(["msg" => "Envio Correcto"], 200);
+        return response()->json(["msg" => 1], 200);
     }
 }
