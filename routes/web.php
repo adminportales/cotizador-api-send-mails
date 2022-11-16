@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::post('/sendMailBH', [ApiSendMail::class, 'sendMailBH']);
+Route::post('/sendMailPZ', [ApiSendMail::class, 'sendMailPZ']);
