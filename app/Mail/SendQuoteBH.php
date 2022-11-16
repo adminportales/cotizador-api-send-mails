@@ -17,12 +17,13 @@ class SendQuoteBH extends Mailable
      *
      * @return void
      */
-    public $vendedor, $cliente, $file;
-    public function __construct($vendedor, $cliente, $file)
+    public $vendedor, $cliente, $file, $email;
+    public function __construct($vendedor, $cliente, $file, $email)
     {
         $this->vendedor = $vendedor;
         $this->cliente = $cliente;
         $this->file = $file;
+        $this->email = $email;
     }
 
 
@@ -37,10 +38,11 @@ class SendQuoteBH extends Mailable
             ->with('cliente', $this->cliente)
             ->with('vendedor', $this->vendedor)
             ->subject('Cotizacion BH TradeMarket')
-            ->from(auth()->user()->email, auth()->user()->name)
-            ->attach(public_path() . $this->file, [
+            ->from($this->email, $this->vendedor)
+            ->attach($this->file, [
                 'as' => 'Hoja de Cotizacion.pdf',
                 'mime' => 'application/pdf',
-            ]);
+            ])
+        ;
     }
 }
