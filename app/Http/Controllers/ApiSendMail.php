@@ -14,7 +14,7 @@ class ApiSendMail extends Controller
     {
         try {
             Mail::to($request->clienteEmail)
-                ->send(new SendQuoteBH($request->nameSeller, $request->client, $request->fileUrl, $request->emailSeller));
+                ->send(new SendQuoteBH($request->nameSeller, $request->client, $request->fileUrl, $request->nameFile, $request->emailSeller));
         } catch (Exception $e) {
             return response()->json(["msg" =>  $e->getMessage()], 400);
         }
@@ -25,7 +25,7 @@ class ApiSendMail extends Controller
     {
         try {
             Mail::to($request->clienteEmail)
-                ->send(new SendQuotePZ($request->nameSeller, $request->client, $request->fileUrl, $request->emailSeller));
+                ->send(new SendQuotePZ($request->nameSeller, $request->client, $request->fileUrl, $request->nameFile, $request->emailSeller));
         } catch (Exception $e) {
             return response()->json(["msg" =>  $e->getMessage()], 400);
         }
